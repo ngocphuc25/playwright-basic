@@ -24,17 +24,18 @@ test('js confirm =>cancel', async ({page}) => {
     await expect(page.getByText('You clicked: Cancel')).toBeVisible();
 })
 
-test('js confirm =>OK', async ({page}) => {
-    await page.goto("https://the-internet.herokuapp.com/javascript_alerts")
-    await page.getByRole('button', { name: 'Click for JS Confirm' }).click();
-    
-    page.on('dialog', async (dialog) => {
-        expect(dialog.message()).toEqual('I am a JS Confirm')
+test('js confirm => OK', async ({ page }) => {
+    await page.goto('https://the-internet.herokuapp.com/javascript_alerts');
+
+    page.once('dialog', async (dialog) => {
+        expect(dialog.message()).toEqual('I am a JS Confirm');
         await dialog.accept();
     });
 
-    await expect(page.getByText('You clicked: OK')).toBeVisible();
-})
+    await page.getByRole('button', { name: 'Click for JS Confirm' }).click();
+
+    await expect(page.locator('#result')).toHaveText('You clicked: Ok');
+});
 test('js prompt ', async ({page}) => {
     page.on('dialog', async (dialog) => {
         expect(dialog.message()).toEqual('I am a JS prompt')
