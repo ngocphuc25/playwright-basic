@@ -1,0 +1,16 @@
+import {test as base } from '@playwright/test';
+import { LoginPage } from '../pages/login.page';
+
+
+type HerokuPage = {
+    loginPage: LoginPage
+    getcurrentUrl: () => Promise<string>
+}
+
+export const test =base.extend<HerokuPage>({
+    loginPage: async ({ page }, use) => {
+        const loginPage = new LoginPage(page);  
+        await use(loginPage);
+    }
+})
+export { expect } from '@playwright/test';
