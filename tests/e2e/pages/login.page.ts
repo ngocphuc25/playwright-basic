@@ -1,4 +1,4 @@
-import { Expect,Locator,Page } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 
 export class LoginPage {
     readonly page: Page;
@@ -14,10 +14,7 @@ export class LoginPage {
     await this.page.getByRole('textbox', {name: 'Password'}).fill(password);
     await this.page.getByRole('button', {name: 'Login'}).click();
     }
- async isLoginSuccessful() {
-    return await this.page
-        .getByRole('heading', { name: 'Secure Area' })
-        .first()
-        .isVisible();
-}
+    secureAreaHeading(): Locator {
+        return this.page.getByRole('heading', { name: 'Secure Area', exact: true });
+    }
 }

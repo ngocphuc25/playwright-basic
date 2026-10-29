@@ -13,7 +13,7 @@ export class ForgotPasswordPage {
     await this.page.getByRole('textbox', {name: 'Email'}).fill(email);
     await this.page.getByRole('button', {name: 'Submit'}).click();
     }
-    async isLoginSuccessful() {
+    async isForgotPasswordSuccessful() {
         if (await this.page.getByRole('heading', {name: 'Secure Area'}).first().isVisible()) {
             return true;
         }

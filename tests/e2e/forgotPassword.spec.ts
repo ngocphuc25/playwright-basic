@@ -7,6 +7,5 @@ test('verify forgot password form submits', async ({ page }) => {
     await page.locator('#email').fill('test@example.com');
     await page.locator('#form_submit').click();
 
-    await expect(page.locator('h1')).toContainText('Internal Server Error', { timeout: 15000 });
+    await expect(page.getByText("Your e-mail's been sent!")).toBeVisible();
 });
-
